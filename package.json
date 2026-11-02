@@ -1,0 +1,22 @@
+{
+  "name": "mundos-ia",
+  "version": "1.0.0",
+  "description": "Generador de bocetos visuales y mundos imaginarios con IA en consola",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "ia",
+    "mundos-imaginarios",
+    "videojuegos",
+    "sena",
+    "nodejs",
+    "cli"
+  ],
+  "author": "Breiner Ocampo",
+  "license": "ISC",
+  "dependencies": {
+    "object-hash": "^3.0.0"
+  }
+}
