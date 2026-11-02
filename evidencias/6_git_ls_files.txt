@@ -1,0 +1,31 @@
+================================================================================
+EVIDENCIA 6: VERIFICACIÓN DE ARCHIVOS RASTREADOS EN GIT (git ls-files)
+================================================================================
+
+COMANDO EJECUTADO:
+git ls-files
+
+SALIDA DEL COMANDO:
+.env.example
+.gitignore
+PROMPT.md
+README.md
+evidencias/1_ejecucion_mundo1.txt
+evidencias/2_ejecucion_mundo2.txt
+evidencias/3_reutilizacion_archivos.txt
+evidencias/4_tres_errores_provocados.txt
+evidencias/5_publish_con_y_sin_gitignore.txt
+evidencias/6_git_ls_files.txt
+evidencias/mundo_865d07cd.jpg
+evidencias/mundo_cba86145.jpg
+evidencias/resumen_evidencias.md
+package-lock.json
+package.json
+src/imagen.js
+src/index.js
+src/mundo.js
+src/texto.js
+
+VERIFICACIÓN DE SEGURIDAD:
+El archivo sensible ".env" (que contiene las claves privadas de las APIs) NO aparece en la lista de archivos rastreados por Git.
+Las carpetas de datos temporales (data/, descripciones/, imagenes/) tampoco se encuentran bajo control de versiones, gracias a las reglas configuradas en .gitignore.

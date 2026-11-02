@@ -1,0 +1,73 @@
+================================================================================
+EVIDENCIA 4: TRES ERRORES PROVOCADOS Y MENSAJES EXPLICATIVOS
+================================================================================
+
+--------------------------------------------------------------------------------
+ERROR 1: FALLO DE CONEXIÓN O URL MAL ESCRITA (TypeError de fetch)
+--------------------------------------------------------------------------------
+Condición provocada:
+Se alteró deliberadamente TEXTO_URL hacia un dominio no existente:
+TEXTO_URL="https://servidor-falso-que-no-existe-xyz.org/api"
+
+Comando:
+npm start -- "Situación de prueba" "Mundo prueba" uno dos tres cuatro cinco
+
+Salida obtenida:
+Paso 1: mundo guardado en data/mundo_1f1c5c28.json
+Error: No se pudo conectar. Revisa tu internet o la URL.
+
+Explicación:
+El módulo nativo fetch lanzó un TypeError por fallo de DNS/conexión. El catch de index.js
+interceptó la excepción e imprimió el mensaje amigable en español requerido, sin exponer
+detalles técnicos ni trazas de error.
+
+
+--------------------------------------------------------------------------------
+ERROR 2: CLAVE INVÁLIDA O NO AUTORIZADA (HTTP 401 / 403)
+--------------------------------------------------------------------------------
+Condición provocada:
+Se configuró una clave apócrifa o inválida contra una API que requiere autenticación:
+TEXTO_URL="https://api.groq.com/openai/v1/chat/completions"
+TEXTO_API_KEY="gsk_clave_falsa_invalida_12345"
+
+Comando:
+npm start -- "Prueba de error clave" "Mundo clave falsa" c1 c2 c3 c4 c5
+
+Salida obtenida:
+Paso 1: mundo guardado en data/mundo_a684a9e7.json
+Error: La API key no es válida. Revisa tu archivo .env.
+
+Explicación:
+El servidor respondió HTTP 401 Unauthorized. La función evaluarRespuesta detectó el código de estado
+y arrojó un error indicando que la clave debe ser revisada en el archivo .env, protegiendo en todo
+momento el valor de la clave de ser impreso en la consola.
+
+
+--------------------------------------------------------------------------------
+ERROR 3: MODELO O RUTA INEXISTENTE / OBSOLETA (HTTP 404 / 410)
+--------------------------------------------------------------------------------
+Condición provocada:
+Se solicitó un modelo inexistente o dado de baja (End of Life):
+TEXTO_URL="https://integrate.api.nvidia.com/v1/chat/completions"
+TEXTO_MODELO="modelo-inexistente-xyz"
+
+Comando:
+npm start -- "Prueba modelo inexistente" "Mundo 404" a b c d e
+
+Salida obtenida:
+Paso 1: mundo guardado en data/mundo_20301816.json
+Error: El modelo o la URL no existen. Revisa tu configuración.
+
+Explicación:
+La API respondió con código HTTP 404/410. El manejador de errores informó claramente al usuario
+que el modelo o la URL configurada no están disponibles.
+
+
+--------------------------------------------------------------------------------
+ERROR ADICIONAL DE DEMOSTRACIÓN: TIMEOUT (AbortSignal.timeout)
+--------------------------------------------------------------------------------
+Condición:
+Cuando el servicio tarda más de 30 segundos (AbortSignal.timeout(30000)).
+
+Salida obtenida:
+Error: El servicio tardó demasiado en responder.

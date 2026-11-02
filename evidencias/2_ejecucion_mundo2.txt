@@ -1,0 +1,36 @@
+================================================================================
+EVIDENCIA 2: EJECUCIÓN COMPLETA - MUNDO 2
+================================================================================
+
+COMANDO EJECUTADO:
+npm start -- "Un festival de linternas ilumina las ruinas sumergidas" "Atlántida de Cristal, una civilización submarina oculta bajo el océano" turquesa magenta ambar coral esmeralda
+
+SALIDA EN CONSOLA:
+> mundos-ia@1.0.0 start
+> node src/index.js Un festival de linternas ilumina las ruinas sumergidas Atlántida de Cristal, una civilización submarina oculta bajo el océano turquesa magenta ambar coral esmeralda
+
+Paso 1: mundo guardado en data/mundo_865d07cd.json
+Paso 2: descripción guardada en descripciones/mundo_865d07cd.txt
+Paso 3: imagen guardada en imagenes/mundo_865d07cd.jpg
+Listo. Revisa la carpeta imagenes/
+
+CONTENIDO DEL JSON GENERADO (data/mundo_865d07cd.json):
+{
+  "id": "865d07cd",
+  "situacion": "Un festival de linternas ilumina las ruinas sumergidas",
+  "mundo": "Atlántida de Cristal, una civilización submarina oculta bajo el océano",
+  "colores": [
+    "turquesa",
+    "magenta",
+    "ambar",
+    "coral",
+    "esmeralda"
+  ],
+  "creadoEn": "2026-11-02T20:38:20.150Z"
+}
+
+DESCRIPCIÓN GENERADA (descripciones/mundo_865d07cd.txt):
+Bioluminescent lanterns cast an amber glow through the submerged crystalline arches of Atlántida de Cristal, where aquatic ruins glow with iridescent emerald reflections along fractured spires. In the background, swirling schools of fish reflect flashes of brilliant magenta light, while turquoise water currents sweep around ancient carved pillars covered in living coral reefs tinted in soft orange-red hues. The low-angle cinematic composition captures the dizzying scale of this sunken wonderland in painterly digital fantasy realism.
+
+IMAGEN GENERADA:
+imagenes/mundo_865d07cd.jpg (59.6 KB, 1024x1024 px, JPEG binario)

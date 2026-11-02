@@ -1,0 +1,36 @@
+================================================================================
+EVIDENCIA 1: EJECUCIÓN COMPLETA - MUNDO 1
+================================================================================
+
+COMANDO EJECUTADO:
+npm start -- "Una tormenta eléctrica amenaza la ciudad flotante" "Aerópolis, un archipiélago de islas que flotan sobre las nubes" rojo azul verde dorado violeta
+
+SALIDA EN CONSOLA:
+> mundos-ia@1.0.0 start
+> node src/index.js Una tormenta eléctrica amenaza la ciudad flotante Aerópolis, un archipiélago de islas que flotan sobre las nubes rojo azul verde dorado violeta
+
+Paso 1: mundo guardado en data/mundo_cba86145.json
+Paso 2: descripción guardada en descripciones/mundo_cba86145.txt
+Paso 3: imagen guardada en imagenes/mundo_cba86145.jpg
+Listo. Revisa la carpeta imagenes/
+
+CONTENIDO DEL JSON GENERADO (data/mundo_cba86145.json):
+{
+  "id": "cba86145",
+  "situacion": "Una tormenta eléctrica amenaza la ciudad flotante",
+  "mundo": "Aerópolis, un archipiélago de islas que flotan sobre las nubes",
+  "colores": [
+    "rojo",
+    "azul",
+    "verde",
+    "dorado",
+    "violeta"
+  ],
+  "creadoEn": "2026-11-02T20:36:29.734Z"
+}
+
+DESCRIPCIÓN GENERADA (descripciones/mundo_cba86145.txt):
+A dramatic, storm‑charged vista of Aerópolis unfolds beneath a jagged sky, where towering glass domes of the floating archipelago pulse with soft, neon green reflections from floating terraces. Lightning crackles in electric blue, illuminating the jagged contours of the city in a fractured glow, while small drones in sleek red silhouettes zip between towers, scattering golden sparks of runway lights. The composition anchors on a rising, cloud‑borne walkway, embellished by violet mist curling around the city’s edges, casting a dreamlike hue over the shimmering rooftops. The overall style evokes a hyper‑realist cinematic scene, mixing sharp geometry with dynamic, saturated lighting, creating dramatic contrasts between the storm’s dark gloom and the city’s radiant, metallic glow.
+
+IMAGEN GENERADA:
+imagenes/mundo_cba86145.jpg (63.6 KB, 1024x1024 px, JPEG binario)

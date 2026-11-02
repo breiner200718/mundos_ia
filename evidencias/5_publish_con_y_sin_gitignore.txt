@@ -1,0 +1,75 @@
+================================================================================
+EVIDENCIA 5: EXPERIMENTO DE PUBLICACIÓN CON Y SIN .gitignore (npm publish --dry-run)
+================================================================================
+
+1. EJECUCIÓN CON .gitignore PRESENTE:
+--------------------------------------------------------------------------------
+Comando:
+npm publish --dry-run
+
+Salida:
+npm warn gitignore-fallback No .npmignore file found, using .gitignore for file exclusion. Consider creating a .npmignore file to explicitly control published files.
+npm notice 
+npm notice package: mundos-ia@1.0.0
+npm notice Tarball Contents 
+npm notice 245B .env.example
+npm notice 431B package.json
+npm notice 5.4kB src/imagen.js
+npm notice 3.5kB src/index.js
+npm notice 3.6kB src/mundo.js
+npm notice 3.6kB src/texto.js
+npm notice Tarball Details 
+npm notice name: mundos-ia
+npm notice version: 1.0.0
+npm notice filename: mundos-ia-1.0.0.tgz
+npm notice package size: 5.0 kB
+npm notice unpacked size: 16.8 kB
+npm notice total files: 6
++ mundos-ia@1.0.0
+
+Análisis:
+Solo se incluyen los archivos esenciales de código y documentación.
+El archivo sensible .env, la carpeta node_modules/ y los datos temporales (data/, descripciones/, imagenes/)
+quedaron estrictamente excluidos del paquete.
+
+
+2. EJECUCIÓN SIN .gitignore (RENOMBRADO A .gitignore.off):
+--------------------------------------------------------------------------------
+Comando:
+Rename-Item .gitignore .gitignore.off
+npm publish --dry-run
+Rename-Item .gitignore.off .gitignore
+
+Salida:
+npm notice 
+npm notice package: mundos-ia@1.0.0
+npm notice Tarball Contents 
+npm notice 245B .env
+npm notice 245B .env.example
+npm notice 50B .gitignore.off
+npm notice 318B data/mundo_865d07cd.json
+npm notice 297B data/mundo_cba86145.json
+npm notice 605B descripciones/mundo_865d07cd.txt
+npm notice 800B descripciones/mundo_cba86145.txt
+npm notice 59.6kB imagenes/mundo_865d07cd.jpg
+npm notice 63.6kB imagenes/mundo_cba86145.jpg
+npm notice 431B package.json
+npm notice 5.4kB src/imagen.js
+npm notice 3.5kB src/index.js
+npm notice 3.6kB src/mundo.js
+npm notice 3.6kB src/texto.js
+npm notice Tarball Details 
+npm notice name: mundos-ia
+npm notice version: 1.0.0
+npm notice filename: mundos-ia-1.0.0.tgz
+npm notice package size: 127.3 kB
+npm notice unpacked size: 142.4 kB
+npm notice total files: 14
++ mundos-ia@1.0.0
+
+Análisis de riesgo y peligro:
+Al no existir .gitignore ni .npmignore, npm empaqueta todo el directorio por defecto.
+Esto provocó que el archivo .env (donde se almacenan las API keys y tokens secretos) quedara
+incluido en el tarball para ser publicado en el registro público de npm, exponiendo credenciales
+financieras o de cuentas personales a cualquier usuario del mundo. Además, se incluyeron
+las imágenes y archivos generados que inflaron innecesariamente el tamaño del paquete.

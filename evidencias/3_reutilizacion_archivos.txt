@@ -1,0 +1,19 @@
+================================================================================
+EVIDENCIA 3: REUTILIZACIÓN DE ARCHIVOS Y AHORRO DE CUOTA (SEGUNDA EJECUCIÓN)
+================================================================================
+
+COMANDO EJECUTADO POR SEGUNDA VEZ (MISMOS ARGUMENTOS):
+npm start -- "Una tormenta eléctrica amenaza la ciudad flotante" "Aerópolis, un archipiélago de islas que flotan sobre las nubes" rojo azul verde dorado violeta
+
+SALIDA EN CONSOLA:
+> mundos-ia@1.0.0 start
+> node src/index.js Una tormenta eléctrica amenaza la ciudad flotante Aerópolis, un archipiélago de islas que flotan sobre las nubes rojo azul verde dorado violeta
+
+Paso 1: mundo guardado en data/mundo_cba86145.json
+Paso 2: la descripción ya existía, no se llamó al modelo de texto.
+Paso 3: la imagen ya existía, no se llamó al modelo de imágenes.
+Listo. Revisa la carpeta imagenes/
+
+OBSERVACIÓN:
+El programa detectó con fs.existsSync que descripciones/mundo_cba86145.txt e imagenes/mundo_cba86145.jpg ya existían.
+Por lo tanto, no realizó ninguna petición HTTP a las APIs externas, ahorrando créditos de la cuota gratuita.
