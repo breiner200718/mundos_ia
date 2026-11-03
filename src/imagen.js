@@ -49,6 +49,9 @@ async function generarImagen(descripcion) {
       if (estado === 404 || estado === 410) {
         throw new Error('El modelo o la URL no existen. Revisa tu configuración.');
       }
+      if (estado === 500 || estado === 502 || estado === 503 || estado === 504) {
+        throw new Error(`El servidor de imágenes está temporalmente saturado o en mantenimiento (HTTP ${estado}). Espera unos 15-30 segundos y vuelve a ejecutar el comando; el programa continuará directamente desde el Paso 3.`);
+      }
       throw new Error(`Error en el servicio de imágenes (código HTTP ${estado}).`);
     }
 
@@ -114,6 +117,9 @@ async function generarImagen(descripcion) {
       }
       if (estado === 404 || estado === 410) {
         throw new Error('El modelo o la URL no existen. Revisa tu configuración.');
+      }
+      if (estado === 500 || estado === 502 || estado === 503 || estado === 504) {
+        throw new Error(`El servidor de imágenes está temporalmente saturado o en mantenimiento (HTTP ${estado}). Espera unos 15-30 segundos y vuelve a ejecutar el comando; el programa continuará directamente desde el Paso 3.`);
       }
       throw new Error(`Error en el servicio de imágenes (código HTTP ${estado}).`);
     }

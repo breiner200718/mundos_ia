@@ -37,9 +37,56 @@ SERVICIOS:
 FORMA DE RESPONDER: dame un archivo a la vez, explica cada bloque en 2 líneas y no uses nada que no esté en el CONTEXTO.
 ```
 
----
+### C.1 Prompt Maestro Optimizado (Versión Mejorada)
 
-## D. Prompts Siguientes, Respuestas y Acciones Realizadas
+Para maximizar la precisión, evitar alucinaciones y asegurar que el modelo de IA cumpla estrictamente con la arquitectura de 3 pasos, la caché de archivos y las restricciones pedagógicas, se diseñó la siguiente versión estructurada:
+
+```text
+Actúa como un desarrollador senior y docente experto en Node.js enfocado en buenas prácticas para aprendices de software.
+
+OBJETIVO:
+Construir una aplicación de consola modular en Node.js puro llamada "mundos-ia" que reciba 7 argumentos por línea de comandos (situación, mundo y 5 colores distintos), genere un objeto JSON con un hash determinista, consulte un modelo de lenguaje (LLM) para obtener una descripción visual artística y consulte un modelo de imágenes para generar y guardar un archivo binario JPEG en disco.
+
+ESTRUCTURA DE ARCHIVOS REQUERIDA:
+mundos-ia/
+├── src/
+│   ├── index.js     # Orquestador del flujo, control de errores y ahorro de cuotas
+│   ├── mundo.js     # Validaciones, hash único (id) y persistencia JSON
+│   ├── texto.js     # Consulta fetch nativa al modelo de lenguaje (LLM)
+│   └── imagen.js    # Consulta fetch al modelo de imágenes y conversión binaria a Buffer
+├── data/            # Almacenamiento de mundos en JSON (mundo_<id>.json)
+├── descripciones/   # Almacenamiento de textos (mundo_<id>.txt)
+├── imagenes/        # Almacenamiento de imágenes binarias (mundo_<id>.jpg)
+├── .env             # Variables de entorno privadas (ignorado en Git)
+├── .env.example     # Plantilla pública de configuración
+├── .gitignore       # Debe ignorar: node_modules/, .env, data/, descripciones/, imagenes/
+├── package.json     # Script start: "node src/index.js", dependencia única: object-hash
+└── README.md
+
+RESTRICCIONES TÉCNICAS ESTRICTAS:
+1. Usa ÚNICAMENTE JavaScript estándar y módulos nativos de Node.js (fs síncrono, path, fetch nativo).
+2. La ÚNICA dependencia externa permitida en package.json es "object-hash". Queda estrictamente prohibido usar dotenv, axios, node-fetch, express, commander, yargs, TypeScript o SDKs de proveedores (openai, groq-sdk).
+3. Utiliza "process.loadEnvFile()" nativo de Node.js 20.12+ para leer el archivo .env sin librerías externas.
+4. Módulos locales organizados con CommonJS (require / module.exports) de forma consistente.
+5. Rutas absolutas resueltas a partir de la ubicación de los archivos usando path.join(__dirname, '..', ...).
+6. El id del mundo debe ser los primeros 8 caracteres del hash sobre { situacion, mundo, colores }. NO incluyas creadoEn en el hash para preservar el determinismo.
+
+FLUJO DE TRABAJO Y SISTEMA DE CACHÉ (AHORRO DE CUOTA):
+- Paso 1 (mundo.js): Validar argumentos (exactamente 7, no vacíos, 5 colores distintos insensibles a mayúsculas). Guardar en data/mundo_<id>.json y releer desde disco con readFileSync + JSON.parse.
+- Paso 2 (texto.js): Verificar si descripciones/mundo_<id>.txt existe. Si ya existe, reutilizarlo sin llamar a la API. Si no, llamar al LLM con un prompt de sistema que exija: un solo párrafo en inglés, 80-120 palabras, describir composición, iluminación y estilo artístico, e incluir los 5 colores. Guardar en descripciones/.
+- Paso 3 (imagen.js): Verificar si imagenes/mundo_<id>.jpg existe. Si ya existe, omitir la llamada. Si no, leer la descripción del archivo .txt y llamar a la API de imágenes (soporte para bytes crudos directos y base64 en JSON). Convertir a Buffer binario (Buffer.from) y guardarlo con fs.writeFileSync sin especificar codificación ('utf-8').
+
+CONTROL DE ERRORES EN ESPAÑOL (SIN EXPOSICIÓN DE CLAVES NI TRAZAS TÉCNICAS):
+- Códigos 401/403: "La API key no es válida. Revisa tu archivo .env."
+- Códigos 402/429: "Superaste el límite gratuito. Espera un momento (revisa el encabezado retry-after si existe)."
+- Códigos 404/410: "El modelo o la URL no existen. Revisa tu configuración."
+- Códigos 500/502/503: "El servidor está saturado o en mantenimiento. Espera unos segundos y vuelve a intentar."
+- TypeError en fetch: "No se pudo conectar. Revisa tu internet o la URL."
+- TimeoutError: "El servicio tardó demasiado en responder." (timeout de 30s para texto y 60s para imagen con AbortSignal.timeout).
+
+FORMATO DE ENTREGA:
+Genera un archivo a la vez con código limpio, modular, completamente documentado en español y explicando brevemente cada módulo.
+```
 
 ### Prompt Siguiente 1:
 - **Prompt:**
